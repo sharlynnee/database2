@@ -1,4 +1,4 @@
-package com.example.wazitoecommerce.ui.theme.screens.products
+package com.example.wazitoecommerce.ui.theme.screens.children
 
 import android.content.Context
 import android.net.Uri
@@ -34,52 +34,52 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.wazitoecommerce.data.ProductViewModel
+import com.example.wazitoecommerce.data.ChildViewModel
 import com.example.wazitoecommerce.ui.theme.WazitoECommerceTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddProductsScreen(navController:NavHostController){
+fun AddChildrenScreen(navController:NavHostController){
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Add Products",
+            text = "Add Child",
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.Cursive
         )
 
-        var productName by remember { mutableStateOf("") }
-        var productQuantity by remember { mutableStateOf("") }
-        var productPrice by remember { mutableStateOf("") }
+        var childName by remember { mutableStateOf("") }
+        var childAge by remember { mutableStateOf("") }
+        var childDescription by remember { mutableStateOf("") }
         val context = LocalContext.current
 
         Spacer(modifier = Modifier.height(30.dp))
 
         OutlinedTextField(
-            value = productName,
-            onValueChange = { productName = it },
-            label = { Text(text = "Product name *") },
+            value = childName,
+            onValueChange = { childName = it },
+            label = { Text(text = "Child's  name *") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            value = productQuantity,
-            onValueChange = { productQuantity = it },
-            label = { Text(text = "Product quantity *") },
+            value = childAge,
+            onValueChange = { childAge = it },
+            label = { Text(text = "Child's Age *") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            value = productPrice,
-            onValueChange = { productPrice = it },
-            label = { Text(text = "Product price *") },
+            value = childDescription,
+            onValueChange = { childDescription = it },
+            label = { Text(text = "Child's description *") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
         )
 
@@ -90,7 +90,7 @@ fun AddProductsScreen(navController:NavHostController){
         //---------------------IMAGE PICKER START-----------------------------------//
 
         var modifier = Modifier
-        ImagePicker(modifier,context, navController, productName.trim(), productQuantity.trim(), productPrice.trim())
+        ImagePicker(modifier,context, navController, childName.trim(), childAge.trim(), childDescription.trim())
 
         //---------------------IMAGE PICKER END-----------------------------------//
 
@@ -100,7 +100,7 @@ fun AddProductsScreen(navController:NavHostController){
 }
 
 @Composable
-fun ImagePicker(modifier: Modifier = Modifier, context: Context,navController: NavHostController, name:String, quantity:String, price:String) {
+fun ImagePicker(modifier: Modifier = Modifier, context: Context,navController: NavHostController, name:String, age:String, description:String) {
     var hasImage by remember { mutableStateOf(false) }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
 
@@ -136,8 +136,8 @@ fun ImagePicker(modifier: Modifier = Modifier, context: Context,navController: N
 
             Button(onClick = {
                 //-----------WRITE THE UPLOAD LOGIC HERE---------------//
-                var productRepository = ProductViewModel(navController,context)
-                productRepository.uploadProduct(name, quantity, price,imageUri!!)
+                var childRepository = ChildViewModel(navController,context)
+                childRepository.uploadChild(name, age, description,imageUri!!)
 
 
             }) {
@@ -149,8 +149,8 @@ fun ImagePicker(modifier: Modifier = Modifier, context: Context,navController: N
 
 @Composable
 @Preview(showBackground = true)
-fun AddProductsScreenPreview(){
+fun AddChildrenScreenPreview(){
     WazitoECommerceTheme {
-        AddProductsScreen(navController = rememberNavController())
+        AddChildrenScreen(navController = rememberNavController())
     }
 }
